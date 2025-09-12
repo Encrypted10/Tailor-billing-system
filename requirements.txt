@@ -1,0 +1,6 @@
+Django>=3.2,<5.0
+gunicorn>=20.1.0   # For production deployments if using WSGI [attached_file:3][attached_file:8]
+psycopg2-binary>=2.9.6  # If using PostgreSQL as DB (change if using other DBs)
+Pillow>=9.0.0      # For handling images in models/admin
+django-crispy-forms>=1.14.0   # For better form rendering and control [attached_file:3]
+reportlab>=3.6.12  # For PDF generation from templates [attached_file:8]
