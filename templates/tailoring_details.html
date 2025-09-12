@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Measurements</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+        }
+
+        .page-header {
+            text-align: center;
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 4px solid #388E3C;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 25px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .customer-details,
+        .other-details {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .customer-details p,
+        .other-details p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .customer-details strong,
+        .other-details strong {
+            color: #333;
+        }
+
+        .measurements-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .measurements-table th,
+        .measurements-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .measurements-table th {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .measurements-table td {
+            background: #fdfdfd;
+            font-size: 14px;
+        }
+
+        .measurements-table tr:nth-child(even) td {
+            background: #f7f7f7;
+        }
+
+        .edit-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 14px;
+            background: #2196F3;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .edit-link:hover {
+            background: #1976D2;
+            transform: scale(1.05);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-link img {
+            height: 40px;
+            width: 40px;
+            vertical-align: middle;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-left: 8px;
+        }
+
+        .back-link a:hover {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        ✂️ Customer Measurements - Star Fashions
+    </div>
+
+    <div class="container">
+        <h2>{{ tailoring_record.name }}'s Measurements</h2>
+
+        <!-- Customer Details -->
+        <div class="customer-details">
+            <p><strong>Clothing Type:</strong> {{ tailoring_record.clothing_type }}</p>
+            <p><strong>Phone Number:</strong> {{ tailoring_record.phone_number }}</p>
+            <p><strong>Bill Number:</strong> {{ tailoring_record.bill_number }}</p>
+            <p><strong>Advance Amount:</strong> Rs. {{ tailoring_record.advance_amount }}</p>
+        </div>
+
+        <!-- Measurements Table -->
+        <div style="overflow-x: auto;">
+            <table class="measurements-table">
+                <thead>
+                    <tr>
+                        <th>Shirt</th>
+                        <th>Pant</th>
+                        <th>Kurta</th>
+                        <th>Pajama</th>
+                        <th>Puna Pant</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Length:</strong> {{ tailoring_record.shirt_length }}<br>
+                            <strong>Shoulder:</strong> {{ tailoring_record.shirt_shoulder }}<br>
+                            <strong>Full Chest:</strong> {{ tailoring_record.shirt_full_chest }}<br>
+                            <strong>Full Stomach:</strong> {{ tailoring_record.shirt_full_stomach }}<br>
+                            <strong>Full Hip:</strong> {{ tailoring_record.shirt_full_hip }}<br>
+                            <strong>Hands:</strong> {{ tailoring_record.shirt_hands }}<br>
+                            <strong>Full Arms:</strong> {{ tailoring_record.shirt_full_arms }}<br>
+                            <strong>Cuff:</strong> {{ tailoring_record.shirt_cuff }}<br>
+                            <strong>Collar:</strong> {{ tailoring_record.shirt_collor }}
+                        </td>
+                        <td>
+                            <strong>Length:</strong> {{ tailoring_record.paint_length }}<br>
+                            <strong>Waist:</strong> {{ tailoring_record.paint_waist }}<br>
+                            <strong>Hip:</strong> {{ tailoring_record.paint_hip }}<br>
+                            <strong>Full Thighs:</strong> {{ tailoring_record.paint_full_thighs }}<br>
+                            <strong>Full Knees:</strong> {{ tailoring_record.paint_full_knees }}<br>
+                            <strong>Leg Bottom:</strong> {{ tailoring_record.paint_leg_bottom }}<br>
+                            <strong>Full Seat:</strong> {{ tailoring_record.paint_full_seat }}
+                        </td>
+                        <td>
+                            <strong>Length:</strong> {{ tailoring_record.kurta_length }}<br>
+                            <strong>Shoulder:</strong> {{ tailoring_record.kurta_shoulder }}<br>
+                            <strong>Full Chest:</strong> {{ tailoring_record.kurta_full_chest }}<br>
+                            <strong>Full Stomach:</strong> {{ tailoring_record.kurta_full_stomach }}<br>
+                            <strong>Full Hip:</strong> {{ tailoring_record.kurta_full_hip }}<br>
+                            <strong>Hands:</strong> {{ tailoring_record.kurta_hands }}<br>
+                            <strong>Full Arms:</strong> {{ tailoring_record.kurta_full_arms }}<br>
+                            <strong>Cuff:</strong> {{ tailoring_record.kurta_cuff }}<br>
+                            <strong>Collar:</strong> {{ tailoring_record.kurta_collor }}
+                        </td>
+                        <td>
+                            <strong>Length:</strong> {{ tailoring_record.pajama_length }}<br>
+                            <strong>Leg Bottom:</strong> {{ tailoring_record.pajama_leg_bottom }}<br>
+                            <strong>Waist:</strong> {{ tailoring_record.pajama_waist }}
+                        </td>
+                        <td>
+                            <strong>Length:</strong> {{ tailoring_record.puna_pant_length }}<br>
+                            <strong>Waist:</strong> {{ tailoring_record.puna_pant_waist }}<br>
+                            <strong>Hip:</strong> {{ tailoring_record.puna_pant_hip }}<br>
+                            <strong>Full Thighs:</strong> {{ tailoring_record.puna_pant_full_thighs }}<br>
+                            <strong>Full Knees:</strong> {{ tailoring_record.puna_pant_full_knees }}<br>
+                            <strong>Leg Bottom:</strong> {{ tailoring_record.puna_pant_leg_bottom }}<br>
+                            <strong>Full Seat:</strong> {{ tailoring_record.puna_pant_full_seat }}
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="{% url 'edit_tailoring' tailoring_record.pk %}" class="edit-link">✏️ Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Other Details -->
+        <div class="other-details">
+            <p><strong>Total Amount:</strong> Rs. {{ tailoring_record.amount }}</p>
+            <p><strong>Order Date:</strong> {{ tailoring_record.order_date }}</p>
+            <p><strong>Order Time:</strong> {{ tailoring_record.order_time }}</p>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-link">
+        <img src="/static/media/back.png" alt="Back">
+        <a href="{% url 'tailoring_list' %}">Back to Records</a>
+    </div>
+
+</body>
+
+</html>

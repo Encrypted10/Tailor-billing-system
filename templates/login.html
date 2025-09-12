@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:#f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .brand {
+            margin-bottom: 1.5rem;
+        }
+
+        .brand h1 {
+            font-size: 2rem;
+            color: #2575fc;
+            margin: 0;
+        }
+
+        .brand p {
+            font-size: 0.95rem;
+            color: #666;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            margin: 1rem 0 1.5rem 0;
+            font-size: 1.5rem;
+            color: #444;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #2575fc;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #1a5bd7;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #2575fc;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <!-- Branding Section -->
+        <div class="brand">
+            <h1>Star Fashions</h1>
+            <p>Textiles and Tailors</p>
+        </div>
+
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+
+            <button type="submit">Login</button>
+            <a href="{% url 'register' %}">Don’t have an account? Register</a>
+        </form>
+        <footer>
+            Design & Developed by Khaja Mubashir Arsalan <br>
+            <a href="mailto:kmarsalan124@gmail.com">kmarsalan124@gmail.com</a>
+        </footer>
+    </div>
+</body>
+
+</html>

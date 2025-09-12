@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Recorded - STAR FASHIONS</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f8ff, #dfefff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .container h1 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 26px;
+        }
+
+        .container p {
+            color: #444;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e63946;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            margin: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #fff;
+            background: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        .btn-alt {
+            background: #007bff;
+        }
+
+        .btn-alt:hover {
+            background: #0069d9;
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>✅ Measurements Recorded Successfully!</h1>
+        <p>Thank you, <span class="highlight">{{ billapp_tailoring.name|default:"Customer" }}</span>.</p>
+        <p>Your order has been placed with <span class="brand">Star Fashions</span>.</p>
+        <p><strong>Clothing Type:</strong> {{ billapp_tailoring.clothing_type|default:"Not available" }}</p>
+        <p><b>We will ensure the best quality tailoring for your order.</b></p>
+
+        <div class="buttons">
+            <form action="{% url 'generate_pdf' %}" style="display:inline;">
+                <button type="submit" class="btn">📄 share PDF to customer</button>
+            </form>
+            <a href="{% url 'tailoring_form_view' %}" class="btn btn-alt">🧾 Go to Billing Page</a>
+        </div>
+
+        <div class="footer">
+            ⭐ Thank you for choosing Star Fashions. Visit us again! ⭐
+        </div>
+    </div>
+</body>
+
+</html>

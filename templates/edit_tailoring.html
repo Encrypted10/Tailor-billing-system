@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Measurements</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+        }
+
+        .page-header {
+            text-align: center;
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 4px solid #388E3C;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 20px 30px;
+            background: #fdfdfd;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: bold;
+            margin: 12px 0 5px;
+            color: #444;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .form-container button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background: #43A047;
+            transform: scale(1.02);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link img {
+            height: 40px;
+            width: 40px;
+            vertical-align: middle;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .back-link a:hover {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Page Header -->
+    <div class="page-header">
+        ✂️ Star Fashions - Edit Measurements
+    </div>
+
+    <div class="container">
+        <h2>Edit Measurements for {{ form.instance.name }}</h2>
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">💾 Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="back-link">
+        <img src="/static/media/back.png" alt="Back">
+        <a href="{% url 'tailoring_list' %}">Back to Records</a>
+    </div>
+</body>
+
+</html>

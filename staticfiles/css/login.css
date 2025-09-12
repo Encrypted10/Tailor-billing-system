@@ -1,0 +1,20 @@
+body{
+    background-image: linear-gradient(to left, #a8edea 0%, #fed6e3 100%);
+}
+.fom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    margin-top: 35vh; 
+    width: 250px;
+    height: 250px;
+    margin-left: 43vw;
+    border: 2px solid rgba(0, 0, 0, 0.293);
+}
+button{
+    margin-left: 42%;
+}
+a{
+    text-decoration: none;
+}

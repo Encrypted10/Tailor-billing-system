@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailoring Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:#f9f9f9 ;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #2575fc;
+            font-size: 2rem;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #444;
+            font-size: 1.3rem;
+            border-left: 4px solid #2575fc;
+            padding-left: 8px;
+        }
+
+        #form-container {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0 0 4px rgba(37, 117, 252, 0.3);
+        }
+
+        .measurements {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        #btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #2575fc;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #btn:hover {
+            background: #1a5bd7;
+        }
+
+        footer {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function toggleMeasurements() {
+                var clothingType = document.getElementById('id_clothing_type').value;
+
+                // All measurement sections
+                var sections = {
+                    shirt: document.getElementById('shirtMeasurements'),
+                    pant: document.getElementById('pantMeasurements'),
+                    kurta: document.getElementById('kurtaMeasurements'),
+                    pajama: document.getElementById('pajamaMeasurements'),
+                    kurta_puna_pant: document.getElementById('kurtaPunaPantMeasurements'),
+                    puna_pant: document.getElementById('onlyPunaPantMeasurements')
+                };
+
+                // Hide all
+                for (let key in sections) {
+                    if (sections[key]) sections[key].style.display = 'none';
+                }
+
+                // Show based on choice
+                switch (clothingType) {
+                    case 'shirt':
+                        sections.shirt.style.display = 'block';
+                        break;
+                    case 'paint':
+                        sections.pant.style.display = 'block';
+                        break;
+                    case 'shirt_pant':
+                        sections.shirt.style.display = 'block';
+                        sections.pant.style.display = 'block';
+                        break;
+                    case 'kurta':
+                        sections.kurta.style.display = 'block';
+                        break;
+                    case 'kurta_pajama':
+                        sections.kurta.style.display = 'block';
+                        sections.pajama.style.display = 'block';
+                        break;
+                    case 'pajama':
+                        sections.pajama.style.display = 'block';
+                        break;
+                    case 'kurta_puna_pant':
+                        sections.kurta.style.display = 'block';
+                        sections.puna_pant.style.display = 'block';
+                        break;
+                    case 'puna_pant':
+                        sections.puna_pant.style.display = 'block';
+                        break;
+                }
+            }
+
+            var clothingTypeElement = document.getElementById('id_clothing_type');
+            if (clothingTypeElement) {
+                clothingTypeElement.addEventListener('change', toggleMeasurements);
+                toggleMeasurements(); // Initial
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    {% if request.user.is_superuser %}
+    {% include 'adminnavbar.html' %}
+    {% else %}
+    {% include 'navbar.html' %}
+    {% endif %}
+    <!-- Navbar -->
+
+    <h1>Tailoring Request Form</h1>
+    <form id="form-container" method="post" action="{% url 'tailoring_form_view' %}">
+        {% csrf_token %}
+
+        <!-- Clothing Type -->
+        <label for="{{ form.clothing_type.id_for_label }}">{{ form.clothing_type.label }}</label>
+        {{ form.clothing_type }}
+
+        <!-- Personal Information -->
+        <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+        {{ form.name }}
+
+        <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+        {{ form.phone_number }}
+
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}
+
+        <label for="{{ form.bill.id_for_label }}">{{ form.bill.label }}</label>
+        {{ form.bill }}
+
+        <!-- Shirt Measurements -->
+        <div id="shirtMeasurements" class="measurements">
+            <h2>Shirt Measurements</h2>
+            {{ form.shirt_length.label_tag }} {{ form.shirt_length }}
+            {{ form.shirt_shoulder.label_tag }} {{ form.shirt_shoulder }}
+            {{ form.shirt_full_chest.label_tag }} {{ form.shirt_full_chest }}
+            {{ form.shirt_full_stomach.label_tag }} {{ form.shirt_full_stomach }}
+            {{ form.shirt_full_hip.label_tag }} {{ form.shirt_full_hip }}
+            {{ form.shirt_hands.label_tag }} {{ form.shirt_hands }}
+            {{ form.shirt_full_arms.label_tag }} {{ form.shirt_full_arms }}
+            {{ form.shirt_cuff.label_tag }} {{ form.shirt_cuff }}
+            {{ form.shirt_collor.label_tag }} {{ form.shirt_collor }}
+        </div>
+
+        <!-- Pant Measurements -->
+        <div id="pantMeasurements" class="measurements">
+            <h2>Pant Measurements</h2>
+            {{ form.paint_length.label_tag }} {{ form.paint_length }}
+            {{ form.paint_waist.label_tag }} {{ form.paint_waist }}
+            {{ form.paint_hip.label_tag }} {{ form.paint_hip }}
+            {{ form.paint_full_thighs.label_tag }} {{ form.paint_full_thighs }}
+            {{ form.paint_full_knees.label_tag }} {{ form.paint_full_knees }}
+            {{ form.paint_leg_bottom.label_tag }} {{ form.paint_leg_bottom }}
+            {{ form.paint_full_seat.label_tag }} {{ form.paint_full_seat }}
+        </div>
+
+        <!-- Kurta Measurements -->
+        <div id="kurtaMeasurements" class="measurements">
+            <h2>Kurta Measurements</h2>
+            {{ form.kurta_length.label_tag }} {{ form.kurta_length }}
+            {{ form.kurta_shoulder.label_tag }} {{ form.kurta_shoulder }}
+            {{ form.kurta_full_chest.label_tag }} {{ form.kurta_full_chest }}
+            {{ form.kurta_full_stomach.label_tag }} {{ form.kurta_full_stomach }}
+            {{ form.kurta_full_hip.label_tag }} {{ form.kurta_full_hip }}
+            {{ form.kurta_hands.label_tag }} {{ form.kurta_hands }}
+            {{ form.kurta_full_arms.label_tag }} {{ form.kurta_full_arms }}
+            {{ form.kurta_cuff.label_tag }} {{ form.kurta_cuff }}
+            {{ form.kurta_collor.label_tag }} {{ form.kurta_collor }}
+        </div>
+
+        <!-- Pajama Measurements -->
+        <div id="pajamaMeasurements" class="measurements">
+            <h2>Pajama Measurements</h2>
+            {{ form.pajama_length.label_tag }} {{ form.pajama_length }}
+            {{ form.pajama_leg_bottom.label_tag }} {{ form.pajama_leg_bottom }}
+            {{ form.pajama_waist.label_tag }} {{ form.pajama_waist }}
+        </div>
+
+        <!-- Puna Pant -->
+        <div id="onlyPunaPantMeasurements" class="measurements">
+            <h2>Puna Pant Measurements</h2>
+            {{ form.puna_pant_length.label_tag }} {{ form.puna_pant_length }}
+            {{ form.puna_pant_waist.label_tag }} {{ form.puna_pant_waist }}
+            {{ form.puna_pant_hip.label_tag }} {{ form.puna_pant_hip }}
+            {{ form.puna_pant_full_thighs.label_tag }} {{ form.puna_pant_full_thighs }}
+            {{ form.puna_pant_full_knees.label_tag }} {{ form.puna_pant_full_knees }}
+            {{ form.puna_pant_leg_bottom.label_tag }} {{ form.puna_pant_leg_bottom }}
+            {{ form.puna_pant_full_seat.label_tag }} {{ form.puna_pant_full_seat }}
+        </div>
+
+        <!-- Payment Info -->
+        <label for="{{ form.advance_amount.id_for_label }}">{{ form.advance_amount.label }}</label>
+        {{ form.advance_amount }}
+
+        <label for="{{ form.amount.id_for_label }}">{{ form.amount.label }}</label>
+        {{ form.amount }}
+
+        <button id="btn" type="submit">Submit</button>
+    </form>
+
+</body>
+
+</html>
