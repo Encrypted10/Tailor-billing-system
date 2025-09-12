@@ -5,3 +5,4 @@ Pillow>=9.0.0      # For handling images in models/admin
 django-crispy-forms>=1.14.0   # For better form rendering and control [attached_file:3]
 reportlab>=3.6.12  # For PDF generation from templates [attached_file:8]
 xhtml2pdf
+whitenoise
