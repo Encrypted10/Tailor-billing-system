@@ -141,15 +141,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # ADMIN_PASSWORD = '123456'
 
 # Email
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+import os
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'chh41019@gmail.com'  # Replace with your email
-EMAIL_HOST_PASSWORD = 'ljnq lgyi kzpw rilx'  # Replace with your email password or app-specific password
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'chh41019@gmail.com'  # Replace with your email
+# EMAIL_HOST_PASSWORD = 'ljnq lgyi kzpw rilx'  # Replace with your email password or app-specific password
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
