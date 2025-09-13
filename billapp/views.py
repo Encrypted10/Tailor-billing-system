@@ -383,47 +383,42 @@ def generate_pdf(tailoring_data):
 
 
 
+import os
+from django.conf import settings
+
 def generate_pdf_view(request):
-    # Get the tailoring data from the session or other source
     billapp_tailoring = request.session.get('billapp_tailoring', {})
+    pdf_stream = generate_pdf(billapp_tailoring)  # Assume returns BytesIO or similar
     
- 
+    # Save PDF to disk
+    pdf_dir = os.path.join(settings.MEDIA_ROOT, 'pdfs')
+    os.makedirs(pdf_dir, exist_ok=True)
+    filename = f"order_{billapp_tailoring.get('name', 'client').replace(' ', '_')}.pdf"
+    file_path = os.path.join(pdf_dir, filename)
     
-    # Generate PDF
-    pdf_stream = generate_pdf(billapp_tailoring)
+    with open(file_path, 'wb') as f:
+        pdf_stream.seek(0)
+        f.write(pdf_stream.read())
     
-    # Check if PDF was generated successfully
-
-
-    # Get email address from the tailoring data
-    customer_email = billapp_tailoring.get('email', 'default@example.com')
-
     # Prepare email
-    email_subject = "Star Fashion Invoice"
-    email_body = "Thank you for your order. Please find your invoice attached."
-    from_email = 'ch41019@gmail.com'
-    to_email = customer_email
-
-    # Create email message with attachment
+    customer_email = billapp_tailoring.get('email', 'default@example.com')
     email = EmailMessage(
-        email_subject,
-        email_body,
-        from_email,
-        [to_email]
+        "Star Fashion Invoice",
+        "Thank you for your order. Please find your invoice attached.",
+        'ch41019@gmail.com',
+        [customer_email]
     )
-    # Attach the PDF
-    pdf_stream.seek(0)  # Ensure the stream is at the start
-    email.attach('invoice.pdf', pdf_stream.read(), 'application/pdf')
+    
+    # Attach the saved PDF
+    with open(file_path, 'rb') as f:
+        email.attach(filename, f.read(), 'application/pdf')
 
-    # Send email
     email.send(fail_silently=False)
-    # try:
-    email.send(fail_silently=False)
-            # Return JSON response indicating success
-            # return JsonResponse({'success': 'Your invoice has been sent successfully!'})
-    client_name = request.session.get('billapp_tailoring', {}).get('name', 'Client')
-    client_email = request.session.get('billapp_tailoring', {}).get('email', 'Client')  # Default to 'Client' if name is not found  # Default to 'Client' if name is not found
-    return HttpResponse(f'Successfully, your invoice has been sent to {client_name} and email is {client_email}.')
+    
+    client_name = billapp_tailoring.get('name', 'Client')
+    client_email = billapp_tailoring.get('email', 'Client')
+    return HttpResponse(f'Successfully, your invoice has been saved and sent to {client_name} ({client_email}).')
+
 #     # except Exception as e:
     #         # return JsonResponse({'error': f'Error sending email: {str(e)}'}, status=500)
     #         HttpResponse('Fild to sent inovice')
