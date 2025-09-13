@@ -1,88 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
             background-color: #f7f7f7;
+            color: #333;
         }
 
-        /* Main container with border
         .invoice-container {
-            border: 1px solid #d3d3d3; /* Light gray border */
-            /* padding: 20px;
-            background-color: white;
-            max-width: 600px;
+            background: #fff;
+            max-width: 700px;
             margin: 0 auto;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Shadow for depth */
-            /* border-radius: 5px; Optional: Rounded corners */ 
-        /* }  */
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
 
         h1 {
             color: #2c3e50;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .address {
             text-align: center;
+            font-size: 14px;
+            color: #555;
             margin-bottom: 20px;
         }
 
-        .info {
-            margin-bottom: 20px;
+        hr {
+            border: none;
+            border-top: 2px solid #eee;
+            margin: 15px 0;
+        }
+
+        .info p {
+            margin: 6px 0;
+            font-size: 15px;
         }
 
         .table-container {
             width: 100%;
-            border-collapse: collapse; /* Make table look unified */
+            border-collapse: collapse;
             margin-top: 20px;
         }
 
-        .table-container th, .table-container td {
-            padding: 8px;
+        .table-container th,
+        .table-container td {
+            padding: 10px;
+            border: 1px solid #ddd;
             text-align: left;
-            border: 1px solid #ddd; /* Border for table cells */
+            font-size: 15px;
         }
 
         .table-container th {
             background-color: #f2f2f2;
+            font-weight: bold;
         }
 
         .total {
             text-align: right;
             font-weight: bold;
             margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: #666;
         }
     </style>
 </head>
+
 <body>
     <div class="invoice-container">
         <h1>STAR FASHIONS</h1>
-        <!-- <img src="/static/media" alt=""> -->
         <div class="address">
             <p>Beside Nandanavanam Masjid</p>
             <p>Meerpet, Hyderabad</p>
-            <p>cell: 9963355097</p>
-        </div><hr>
+            <p>Cell: 9963355097</p>
+        </div>
+        <hr>
 
         <div class="info">
             <p><strong>Customer Name:</strong> {{ billapp_tailoring.name }}</p>
             <p><strong>Phone Number:</strong> {{ billapp_tailoring.phone_number }}</p>
             <p><strong>Email:</strong> {{ billapp_tailoring.email }}</p>
-            <p><strong>advance_amount:</strong> {{ billapp_tailoring.advance_amount }}</p>
-            <p><strong>Bill:</strong> {{ billapp_tailoring.bill }}</p>
+            <p><strong>Advance Paid:</strong> Rs.{{ billapp_tailoring.advance_amount }}</p>
+            <p><strong>Bill Status:</strong> {{ billapp_tailoring.bill }}</p>
             <p><strong>Bill Number:</strong> {{ billapp_tailoring.bill_number }}</p>
-
-
-
         </div>
 
-        <!-- Table for item and amount -->
         <table class="table-container">
             <thead>
                 <tr>
@@ -92,145 +110,20 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ billapp_tailoring.clothing_type }}</td>                   
+                    <td>{{ billapp_tailoring.clothing_type }}</td>
                     <td>Rs.{{ billapp_tailoring.amount }}</td>
                 </tr>
             </tbody>
         </table>
-        
+
         <div class="total">
             <p>Total Amount: Rs.{{ billapp_tailoring.amount }}</p>
         </div>
 
-        <!-- Conditional Measurements Table -->
-        <h2>Measurements</h2>
-        <table class="table-container">
-            <thead>
-                <tr>
-                    <th>Measurement Type</th>
-                    <th>Value (inches & cm)</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if billapp_tailoring.clothing_type == 'shirt' %}
-                <tr>
-                    <td>Shirt Length</td>
-                    <td>{{ billapp_tailoring.shirt_length|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Shirt Shoulder</td>
-                    <td>{{ billapp_tailoring.shirt_shoulder|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Shirt Full Chest</td>
-                    <td>{{ billapp_tailoring.shirt_full_chest|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Shirt Full Stomach</td>
-                    <td>{{ billapp_tailoring.shirt_full_stomach|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Shirt Full Hip</td>
-                    <td>{{ billapp_tailoring.shirt_full_hip|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Shirt Hands</td>
-                    <td>{{ billapp_tailoring.shirt_hands|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Shirt Full Arms</td>
-                    <td>{{ billapp_tailoring.shirt_full_arms|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Shirt Cuff</td>
-                    <td>{{ billapp_tailoring.shirt_cuff|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Shirt Collar</td>
-                    <td>{{ billapp_tailoring.shirt_collor|default:"N/A" }}</td>
-                </tr>
-                {% elif billapp_tailoring.clothing_type == 'paint' %}
-                <tr>
-                    <td>Paint Length</td>
-                    <td>{{ billapp_tailoring.paint_length|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Paint Waist</td>
-                    <td>{{ billapp_tailoring.paint_waist|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Paint Hip</td>
-                    <td>{{ billapp_tailoring.paint_hip|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Paint Full Thighs</td>
-                    <td>{{ billapp_tailoring.paint_full_thighs|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Paint Full Knees</td>
-                    <td>{{ billapp_tailoring.paint_full_knees|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Paint Leg Bottom</td>
-                    <td>{{ billapp_tailoring.paint_leg_bottom|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Paint Full Seat</td>
-                    <td>{{ billapp_tailoring.paint_full_seat|default:"N/A" }}</td>
-                </tr>
-                {% elif billapp_tailoring.clothing_type == 'kurta' %}
-                <tr>
-                    <td>Kurta Length</td>
-                    <td>{{ billapp_tailoring.kurta_length|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Kurta Shoulder</td>
-                    <td>{{ billapp_tailoring.kurta_shoulder|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Kurta Full Chest</td>
-                    <td>{{ billapp_tailoring.kurta_full_chest|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Kurta Full Stomach</td>
-                    <td>{{ billapp_tailoring.kurta_full_stomach|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Kurta Full Hip</td>
-                    <td>{{ billapp_tailoring.kurta_full_hip|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Kurta Hands</td>
-                    <td>{{ billapp_tailoring.kurta_hands|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Kurta Full Arms</td>
-                    <td>{{ billapp_tailoring.kurta_full_arms|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Kurta Cuff</td>
-                    <td>{{ billapp_tailoring.kurta_cuff|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Kurta Collar</td>
-                    <td>{{ billapp_tailoring.kurta_collor|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Pajama Length</td>
-                    <td>{{ billapp_tailoring.pajama_length|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Pajama Leg Bottom</td>
-                    <td>{{ billapp_tailoring.pajama_leg_bottom|default:"N/A" }}</td>
-                </tr>
-                <tr>
-                    <td>Pajama Waist</td>
-                    <td>{{ billapp_tailoring.pajama_waist|default:"N/A" }}</td>
-                </tr>
-                {% endif %}
-            </tbody>
-        </table>
-
+        <div class="footer">
+            <p>Thank you for choosing STAR FASHIONS!</p>
+        </div>
     </div>
 </body>
+
 </html>
