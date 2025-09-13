@@ -153,3 +153,7 @@ EMAIL_HOST_PASSWORD = 'ljnq lgyi kzpw rilx'  # Replace with your email password 
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
