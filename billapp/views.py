@@ -393,7 +393,7 @@ def generate_pdf_view(request):
     # Save PDF to disk
     pdf_dir = os.path.join(settings.MEDIA_ROOT, 'pdfs')
     os.makedirs(pdf_dir, exist_ok=True)
-    filename = f"order_{billapp_tailoring.get('name', 'client').replace(' ', '_')}.pdf"
+    filename = f"order_{billapp_tailoring.get('name', 'client').replace(' ', '_').lower()}.pdf"
     file_path = os.path.join(pdf_dir, filename)
     
     with open(file_path, 'wb') as f:
