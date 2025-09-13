@@ -418,6 +418,10 @@ def generate_pdf_view(request):
     client_name = billapp_tailoring.get('name', 'Client')
     client_email = billapp_tailoring.get('email', 'Client')
     return HttpResponse(f'Successfully, your invoice has been saved and sent to {client_name} ({client_email}).')
+from django.conf import settings
+print(f"EMAIL_HOST_USER={settings.EMAIL_HOST_USER}")
+print(f"EMAIL_HOST_PASSWORD={'Set' if settings.EMAIL_HOST_PASSWORD else 'Not Set'}")
+
 
 #     # except Exception as e:
     #         # return JsonResponse({'error': f'Error sending email: {str(e)}'}, status=500)
