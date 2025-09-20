@@ -406,7 +406,7 @@ def generate_pdf_view(request):
     email = EmailMessage(
         "Star Fashion Invoice",
         "Thank you for your order. Please find your invoice attached.",
-        'ch41019@gmail.com',
+        'starfashion4646@gmail.com',
         [customer_email]
     )
     
