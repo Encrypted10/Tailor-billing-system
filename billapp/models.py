@@ -82,6 +82,8 @@ class Tailoring(models.Model):
     # Date and Time
     order_date = models.DateField(auto_now_add=True, verbose_name='Order Date')
     order_time = models.TimeField(auto_now_add=True, verbose_name='Order Time')
+    description = models.TextField(blank=True, null=True)
+
 
     # def __str__(self):
     #     return f"{self.name} - {self.clothing_type}"

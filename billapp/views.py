@@ -141,7 +141,8 @@ def tailoring_form_view(request):
 
 
                 'advance_amount':float(form.cleaned_data['advance_amount']),
-                'amount': float(form.cleaned_data['amount']),  # Ensure it's JSON serializable
+                'amount': float(form.cleaned_data['amount']),
+'description' : form.cleaned_data.get('description'),  # Ensure it's JSON serializable
             }
             # customer_email = form.cleaned_data['email']
             # email_subject = "Star Fashion Invoice"

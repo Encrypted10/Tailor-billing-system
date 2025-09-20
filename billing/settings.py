@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'billapp'
+    'billapp',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -129,9 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# settings.py
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Or another backend if used
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
 
 
 STATIC_URL = '/static/'
@@ -140,7 +140,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # ADMIN_PASSWORD = '123456'
 
-# Email
+
 import os
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -150,14 +150,15 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'chh41019@gmail.com'  # Replace with your email
-# EMAIL_HOST_PASSWORD = 'ljnq lgyi kzpw rilx'  # Replace with your email password or app-specific password
+# EMAIL_HOST_USER = 'starfashion4646@gmail.com'  
+
+# EMAIL_HOST_PASSWORD = 'eedx utzj qnoh rbgz'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -2,7 +2,15 @@ from django import forms
 from .models import Tailoring
 
 class TailoringForm(forms.ModelForm):
-    email = forms.EmailField(required=True, help_text="Enter your email to receive the invoice.")
+    email = forms.EmailField(required=True, help_text="Enter your email to receive the invoice.",
+    initial='starfashion4646@gmail.com',  # default email value
+    disabled=True )
+    description = forms.CharField(
+    required=False,
+    widget=forms.Textarea(attrs={'placeholder': 'Describe your order', 'rows': 3}),
+    help_text="Optional: Add any additional details for this tailoring order."
+)
+
 
     class Meta:
         model = Tailoring
@@ -15,7 +23,7 @@ class TailoringForm(forms.ModelForm):
             'kurta_full_stomach', 'kurta_full_hip', 'kurta_hands', 'kurta_full_arms', 'kurta_cuff',
             'kurta_collor', 'pajama_length', 'pajama_leg_bottom', 'pajama_waist',
             'puna_pant_length', 'puna_pant_waist', 'puna_pant_hip', 'puna_pant_full_thighs', 'puna_pant_full_knees',
-            'puna_pant_leg_bottom', 'puna_pant_full_seat', 'amount','advance_amount',
+            'puna_pant_leg_bottom', 'puna_pant_full_seat', 'amount','advance_amount','description', 
         ]
         # exclude = ['bill_number']
 
