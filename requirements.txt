@@ -6,4 +6,4 @@ django-crispy-forms>=1.14.0   # For better form rendering and control [attached_
 reportlab>=3.6.12  # For PDF generation from templates [attached_file:8]
 xhtml2pdf
 whitenoise
-widget_tweaks
+widget_tweaks 1.5.0
