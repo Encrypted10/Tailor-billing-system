@@ -7,3 +7,4 @@ reportlab>=3.6.12  # For PDF generation from templates [attached_file:8]
 xhtml2pdf
 whitenoise
 django-widget-tweaks==1.5.0;
+psycopg2-binary
